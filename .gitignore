@@ -1,0 +1,12 @@
+# Entorno virtual
+venv/
+.env
+
+# Archivos de datos y backups
+Backups/
+ultimo_analisis.csv
+*.csv
+
+# Python cache
+__pycache__/
+*.pyc
