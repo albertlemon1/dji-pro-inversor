@@ -1,0 +1,28 @@
+name: Supervisor de Calidad DJI Pro
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: 📥 Clonando el código
+      uses: actions/checkout@v3
+
+    - name: 🐍 Configurando Python 3.10
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.10"
+
+    - name: 📦 Instalando dependencias
+      run: |
+        python -m pip install --upgrade pip
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+    - name: 🔍 Analizando sintaxis (Linting)
+      run: |
+        # Instalar flake8 para revisar errores de código
+        pip install flake8
+        # Detener el proceso si hay errores de sintaxis de Python
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
